@@ -1,10 +1,11 @@
 const express = require("express");
 const database = require("./db-connect/db");
+const basicProjects=require("")
 const app = express();
 let port = 23000;
 database.connectFunction();
 app.use(express.json());
-
+app.use("/api/v1",basicProjects)
 app.get("/sri-eshwar", (req, res) => {
   res.status(200).json({
     success: true,
