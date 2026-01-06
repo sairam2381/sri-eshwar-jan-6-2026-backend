@@ -68,3 +68,31 @@ exports.deleteAdminDetails = async (req, res) => {
     });
   }
 };
+
+exports.updateDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("The ID DETAILS:", id);
+
+    const { email, firstName, password, collegeName } = req.body;
+    const updateDetails = await Admin.findByIdAndUpdate(
+      id,
+      {
+        email,
+        firstName,
+        password,
+        collegeName,
+      },
+      { new: true }
+    );
+    return res.status(200).json({
+      success: true,
+      message: "Data is updated successfully",
+    });
+  } catch (e) {
+    return res.status(500).json({
+      success: false,
+      error: e.message,
+    });
+  }
+};
