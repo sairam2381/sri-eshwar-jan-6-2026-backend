@@ -42,3 +42,29 @@ exports.postAdmindetails = async (req, res) => {
     });
   }
 };
+
+exports.deleteAdminDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("The id details:", id);
+
+    const checkId = await Admin.findById(id);
+    if (!checkId) {
+      return res.status(404).json({
+        success: false,
+        message: "Id is not existing",
+      });
+    }
+    await Admin.findByIdAndDelete(id);
+    return res.status(200).json({
+      success: true,
+      message: "Data is deleted successfully",
+    });
+  } catch (e) {
+    //console.log("The console log ENTERING OVER HERE:");
+    return res.status(500).json({
+      success: false,
+      error: e.message,
+    });
+  }
+};
