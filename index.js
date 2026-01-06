@@ -1,7 +1,10 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const database = require("./db-connect/db");
 const app = express();
 let port = 23000;
+database.connectFunction();
+app.use(express.json());
+
 app.get("/sri-eshwar", (req, res) => {
   res.status(200).json({
     success: true,
