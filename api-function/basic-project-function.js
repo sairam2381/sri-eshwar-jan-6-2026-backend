@@ -17,8 +17,10 @@ exports.getAdmindetails = async (req, res) => {
 };
 exports.postAdmindetails = async (req, res) => {
   try {
-    const { firstName, email, password, collegeName } = req.body; //post
-    if (!firstName || !email || !password || !collegeName) {
+    const { firstName, email, collegeName } = req.body; //post
+    console.log("The request body:", req.body);
+
+    if (!firstName || !email || !collegeName) {
       return res.status(404).json({
         success: false,
         message: "some of the details are empty",
@@ -27,7 +29,7 @@ exports.postAdmindetails = async (req, res) => {
     const createUser = await Admin.create({
       firstName,
       email,
-      password,
+      // password,
       collegeName,
     });
     return res.status(200).json({
